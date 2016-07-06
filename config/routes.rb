@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   get 'todos' => 'todos#index'
-  
+  get 'todos', to: 'todos#show'
+
+  resources :todos, only: [:show, :index]
+
   root 'todos#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
