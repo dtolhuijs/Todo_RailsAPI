@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   get 'todos' => 'todos#index'
   get 'todos', to: 'todos#show'
+  get 'todos/new'=> 'todos#new'
+  get 'todos/create' => 'todos#create'
 
-  resources :todos, only: [:show, :index]
+  resources :todos, only: [:show, :index, :create, :destroy, :new, :edit, :update]
 
   root 'todos#index'
   # The priority is based upon order of creation: first created -> highest priority.
