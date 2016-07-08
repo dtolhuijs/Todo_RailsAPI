@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get 'todos' => 'todos#index'
-  get 'todos', to: 'todos#show'
+  get 'todos/index' => 'todos#index'
+  get 'todos/show', to: 'todos#show'
   get 'todos/new'=> 'todos#new'
   get 'todos/create' => 'todos#create'
 
