@@ -14,6 +14,36 @@ import TodosListItem from './TodosListItem';
       };
     }
 
+    reloadTodos(event) {
+    let projectId = this.props.todosId;
+    let component = this;
+
+    jQuery.getJSON(`https://calm-cove-62935.herokuapp.com/todos${todosId}/todos`, function(data) {
+      console.log(data);
+
+      component.setState({
+        todos: data.todos
+      });
+
+      component.reCount();
+    });
+  }
+
+  reCount() {
+    let component = this;
+
+    this.setState({
+      counts: {
+        todo: component.todosTodo().length,
+        done: component.todosDone().length
+      }
+    });
+  }
+
+ componentDidMount() {
+   this.reloadTodos();
+ }
+
     renderItems(){
       const props = _.omit(this.props, 'todos');
 

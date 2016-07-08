@@ -8,6 +8,29 @@ import React from 'react';
         isEditing: false
     };
   }
+
+  let component = this;
+
+    let newState = jQuery.extend({
+      id: this.state.id,
+      title: this.state.title,
+      completed: this.state.completed
+    }, updatedState);
+
+    this.setState(newState);
+
+    console.log(newState);
+
+    jQuery.ajax({
+      type: "PUT",
+      url: `https://calm-cove-62935.herokuapp.com/todos${this.props.todoId}/todos/${this.props.id}.json`,
+      data: JSON.stringify({
+          todo: newState
+      }),
+      contentType: "application/json",
+      dataType: "json"
+    })
+
   onEditClick() {
     this.setState({isEditing: true});
   }
@@ -43,7 +66,7 @@ import React from 'react';
     return (
       <td style={taskStyle}
         onclick={this.props.toggleTask.bind(this, task)}>
-        <li>{task}</li>
+         <input type="checkbox" />{task}
       </td>
     );
   }

@@ -55,6 +55,27 @@ class App extends React.Component {
     this.setState({ todos: this.state.todos });
   }
 
+   jQuery.ajax({
+     type: "DELETE",
+     url: `https://calm-cove-62935.herokuapp.com/todos${this.props.todoId}/todos/${this.props.id}.json`,
+     contentType: "application/json",
+     dataType: "json"
+   })
+     .done(function(data) {
+       console.log(data);
+       console.log("Deleted! :)");
+     })
+
+     .fail(function(error) {
+       console.log(error);
+     })
+
+     .always(function() {
+       component.props.onDestroy();
+     });
+ }
+
+
     render() {
         return (
           <div>
