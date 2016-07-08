@@ -1,36 +1,13 @@
 import React from 'react';
 
-  class TodosListItem extends React.Component {
-    constructor(props) {
-      super(props);
+class TodosListItem extends React.Component {
+  constructor(props) {
+    super(props);
 
-      this.state = {
-        isEditing: false
+    this.state = {
+      isEditing: false
     };
   }
-
-  let component = this;
-
-    let newState = jQuery.extend({
-      id: this.state.id,
-      title: this.state.title,
-      completed: this.state.completed
-    }, updatedState);
-
-    this.setState(newState);
-
-    console.log(newState);
-
-    jQuery.ajax({
-      type: "PUT",
-      url: `https://calm-cove-62935.herokuapp.com/todos${this.props.todoId}/todos/${this.props.id}.json`,
-      data: JSON.stringify({
-          todo: newState
-      }),
-      contentType: "application/json",
-      dataType: "json"
-    })
-
   onEditClick() {
     this.setState({isEditing: true});
   }
@@ -55,48 +32,48 @@ import React from 'react';
     };
     if (this.state.isEditing) {
       return (
-        <td>
+          <td>
           <form onSubmit={this.onSaveClick.bind(this)}>
-            <input type="text" defaultValue={task} ref="editInput" />
-            </form>
-        </td>
-      );
+    <input type="text" defaultValue={task} ref="editInput" />
+          </form>
+          </td>
+    );
     }
 
     return (
-      <td style={taskStyle}
-        onclick={this.props.toggleTask.bind(this, task)}>
-         <input type="checkbox" />{task}
-      </td>
-    );
+        <td style={taskStyle}
+    onclick={this.props.toggleTask.bind(this, task)}>
+  <li>{task}</li>
+    </td>
+  );
   }
 
   renderActionSection() {
     if (this.state.isEditing) {
       return (
-        <td>
+          <td>
           <button onClick={this.onSaveClick.bind(this)}>Save</button>
-          <button onClick={this.onCancelClick.bind(this)}>Cancel</button>
-        </td>
-      );
-    }
-    return (
-      <td>
-        <button onClick={this.onEditClick.bind(this)}>Edit</button>
-        <button onClick={this.props.deleteTask.bind(this, this.props.task)}
-        >Delete</button>
+      <button onClick={this.onCancelClick.bind(this)}>Cancel</button>
       </td>
     );
+    }
+    return (
+        <td>
+        <button onClick={this.onEditClick.bind(this)}>Edit</button>
+    <button onClick={this.props.deleteTask.bind(this, this.props.task)}
+  >Delete</button>
+    </td>
+  );
   }
 
-    render() {
-      return (
+  render() {
+    return (
         <tr>
-          {this.renderTaskSection()}
-          {this.renderActionSection()}
-        </tr>
-      );
-    }
+        {this.renderTaskSection()}
+    {this.renderActionSection()}
+  </tr>
+  );
   }
+}
 
 export default TodosListItem;

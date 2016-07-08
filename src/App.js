@@ -1,6 +1,9 @@
+import jQuery from 'jquery';
 import React from 'react';
 import CreateTodo from './CreateTodo';
 import TodosList from './TodosList';
+
+
 
 const todos = [
   {
@@ -19,7 +22,7 @@ const todos = [
     task: "play a game",
     isCompleted: true
   }
-]
+];
 
 class App extends React.Component {
   constructor(props) {
@@ -55,41 +58,20 @@ class App extends React.Component {
     this.setState({ todos: this.state.todos });
   }
 
-   jQuery.ajax({
-     type: "DELETE",
-     url: `https://calm-cove-62935.herokuapp.com/todos${this.props.todoId}/todos/${this.props.id}.json`,
-     contentType: "application/json",
-     dataType: "json"
-   })
-     .done(function(data) {
-       console.log(data);
-       console.log("Deleted! :)");
-     })
-
-     .fail(function(error) {
-       console.log(error);
-     })
-
-     .always(function() {
-       component.props.onDestroy();
-     });
- }
-
-
-    render() {
-        return (
-          <div>
-            <h1>Todo List</h1>
-            <CreateTodo todos={this.state.todos} createTask={this.createTask.bind(this)}/>
-            <TodosList
-            todos={this.state.todos}
-            toggleTask={this.toggleTask.bind(this)}
-            saveTask={this.saveTask.bind(this)}
-            deleteTask={this.deleteTask.bind(this)}
-            />
-          </div>
-        );
-    }
+  render() {
+    return (
+        <div>
+        <h1>Todo List</h1>
+    <CreateTodo todos={this.state.todos} createTask={this.createTask.bind(this)}/>
+  <TodosList
+    todos={this.state.todos}
+    toggleTask={this.toggleTask.bind(this)}
+    saveTask={this.saveTask.bind(this)}
+    deleteTask={this.deleteTask.bind(this)}
+  />
+  </div>
+  );
+  }
 }
 
 export default App;
